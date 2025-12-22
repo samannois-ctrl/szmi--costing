@@ -44,74 +44,74 @@ class Menu_model extends CI_Model {
         return $branch;
     }
 
-    // แสดงเมนูเป็น HTML แบบ nested <ul>
+    // แสดงเมนูเป็น HTML สำหรับ Argon Dashboard Sidebar
     private function renderMenu($menuTree,$current_part_menu,$is_child = 0) {
         $html = "";
         foreach ($menuTree as $menu) {
 
-
             if(empty($menu['children'])){
-
+                // Menu item without children
                 if($is_child == 1){
-                    $active_dropdown_child = '';
+                    // Submenu item
+                    $active_class = '';
                     if(strtolower($current_part_menu) == strtolower($menu['path'])){
-                        $active_dropdown_child = 'active';
+                        $active_class = 'active';
                     }
-                    $html .= '<a class="dropdown-item '.$active_dropdown_child.' " href="'.base_url($menu['path']).'">'.$menu['title'].'</a>';
+                    $html .= '<li class="nav-item">';
+                    $html .= '<a class="nav-link '.$active_class.'" href="'.base_url($menu['path']).'">';
+                    $html .= '<span class="sidenav-mini-icon"> • </span>';
+                    $html .= '<span class="sidenav-normal">'.$menu['title'].'</span>';
+                    $html .= '</a>';
+                    $html .= '</li>';
                     
                 }else{
-
-                    $html .= '<li class="nav-item d-none d-sm-inline-block ">';
-
+                    // Top level menu item
+                    $active_class = '';
                     if($current_part_menu == strtolower($menu['path']) ){
-                        $html .= '<span class="nav-link active" >'.$menu['title'].'</span>';
-                    }else{
-                        $html .= '<a href="'.base_url($menu['path']).'" class="nav-link">'.$menu['title'].'</a>';
+                        $active_class = 'active';
                     }
-
-                    $html .= "</li>";
+                    
+                    $html .= '<li class="nav-item">';
+                    $html .= '<a class="nav-link '.$active_class.'" href="'.base_url($menu['path']).'">';
+                    $html .= '<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">';
+                    $html .= '<i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>';
+                    $html .= '</div>';
+                    $html .= '<span class="nav-link-text ms-1">'.$menu['title'].'</span>';
+                    $html .= '</a>';
+                    $html .= '</li>';
                 }
 
             }else{
-                $active_dropdown_header = '';
+                // Menu item with children (collapsible)
+                $active_class = '';
+                $show_class = '';
                 foreach ($menu['children'] as $child) {
                     if(strtolower($current_part_menu) == strtolower($child['path'])){
-                        $active_dropdown_header = 'active';
+                        $active_class = 'active';
+                        $show_class = 'show';
                         break;
                     }
                 }
+                
+                $collapse_id = 'collapse'.str_replace(' ', '', $menu['title']);
                
-                $html .= '<li class="nav-item dropdown">';
-                $html .= '<a class="nav-link dropdown-toggle '. $active_dropdown_header.' " href="#" id="menu-appform" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$menu['title'].'</a>';
+                $html .= '<li class="nav-item">';
+                $html .= '<a data-bs-toggle="collapse" href="#'.$collapse_id.'" class="nav-link '.$active_class.'" aria-controls="'.$collapse_id.'" role="button" aria-expanded="false">';
+                $html .= '<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">';
+                $html .= '<i class="ni ni-folder-17 text-warning text-sm opacity-10"></i>';
+                $html .= '</div>';
+                $html .= '<span class="nav-link-text ms-1">'.$menu['title'].'</span>';
+                $html .= '</a>';
 
-                $html .= '<div class="dropdown-menu" aria-labelledby="menu-appform">';
-
-
-
-                 
+                $html .= '<div class="collapse '.$show_class.'" id="'.$collapse_id.'">';
+                $html .= '<ul class="nav ms-4 ps-3">';
+                
                 $html .= $this->renderMenu($menu['children'],$current_part_menu,1);
 
-
-
-                
-
-
-
+                $html .= '</ul>';
+                $html .= '</div>';
+                $html .= '</li>';
             }
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
         }
          
         return $html;
@@ -119,5 +119,5 @@ class Menu_model extends CI_Model {
 
 
 
-
+}
 }//end class

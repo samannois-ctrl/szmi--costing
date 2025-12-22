@@ -7,9 +7,11 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Bootstrap 4 -->
-<!-- <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.min.js')?>"></script> -->
-<script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+<!-- Argon Dashboard Core -->
+<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/popper.min.js')?>"></script>
+<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/bootstrap.min.js')?>"></script>
+<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/plugins/perfect-scrollbar.min.js')?>"></script>
+<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/plugins/smooth-scrollbar.min.js')?>"></script>
 <!-- ChartJS -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/chart.js/Chart.min.js')?>"></script>
 <!-- Sparkline -->
@@ -29,8 +31,8 @@
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/summernote/summernote-bs4.min.js')?>"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/dist/js/adminlte.js')?>"></script>
+<!-- Argon Dashboard -->
+<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/argon-dashboard.min.js')?>"></script>
 
 
 <!-- SweetAlert2 -->
