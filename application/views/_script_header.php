@@ -7,11 +7,10 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Argon Dashboard Core -->
+<!-- Argon Dashboard Core (Bootstrap 5) -->
 <script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/popper.min.js')?>"></script>
 <script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/bootstrap.min.js')?>"></script>
-<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/plugins/perfect-scrollbar.min.js')?>"></script>
-<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/plugins/smooth-scrollbar.min.js')?>"></script>
+<!-- Note: Perfect Scrollbar removed to prevent errors with top menu layout -->
 <!-- ChartJS -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/chart.js/Chart.min.js')?>"></script>
 <!-- Sparkline -->
@@ -31,8 +30,7 @@
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/summernote/summernote-bs4.min.js')?>"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
-<!-- Argon Dashboard -->
-<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/argon-dashboard.min.js')?>"></script>
+<!-- Note: Argon Dashboard JS removed to prevent Perfect Scrollbar errors -->
 
 
 <!-- SweetAlert2 -->
