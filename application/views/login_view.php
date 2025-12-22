@@ -14,7 +14,6 @@
     
     <!-- Nucleo Icons -->
     <link href="<?php echo asset_url('assets/templates/argon-dashboard/css/nucleo-icons.css')?>" rel="stylesheet" />
-    <link href="<?php echo asset_url('assets/templates/argon-dashboard/css/nucleo-svg.css')?>" rel="stylesheet" />
     
     <!-- Font Awesome Icons -->
     <link href="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css')?>" rel="stylesheet">
@@ -23,26 +22,29 @@
     <!-- Argon Dashboard CSS -->
     <link href="<?php echo asset_url('assets/templates/argon-dashboard/css/argon-dashboard.min.css')?>" rel="stylesheet" />
     
-    <!-- Custom CSS -->
+    <!-- Custom macOS CSS -->
     <link href="<?php echo asset_url('assets/css/argon-custom.css')?>" rel="stylesheet" />
     
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
         }
         
         .login-card {
-            backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            overflow: hidden;
         }
         
         .login-header {
-            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
-            border-radius: 1rem 1rem 0 0;
-            padding: 2rem;
+            background: linear-gradient(135deg, #0533b5 0%, #2563eb 100%);
+            padding: 2.5rem 2rem;
             text-align: center;
         }
         
@@ -50,36 +52,53 @@
             color: #ffffff;
             margin: 0;
             font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .login-header p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0.5rem 0 0 0;
+            font-size: 0.95rem;
         }
         
         .login-body {
-            padding: 2rem;
+            padding: 2.5rem 2rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #1d1d1f;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .form-control {
-            border: 1px solid #d2d6da;
-            border-radius: 0.5rem;
+            border: 1px solid #d2d2d7;
+            border-radius: 10px;
             padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
         
         .form-control:focus {
             border-color: #0533b5;
-            box-shadow: 0 0 0 2px rgba(5, 51, 181, 0.1);
+            box-shadow: 0 0 0 3px rgba(5, 51, 181, 0.1);
         }
         
         .btn-login {
-            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
+            background: linear-gradient(135deg, #0533b5 0%, #2563eb 100%);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 10px;
             color: #ffffff;
             padding: 0.75rem 2rem;
             font-weight: 600;
-            transition: all 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
         
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(5, 51, 181, 0.4);
+            box-shadow: 0 8px 20px rgba(5, 51, 181, 0.3);
         }
         
         .password-toggle {
@@ -88,8 +107,9 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #8898aa;
+            color: #86868b;
             z-index: 10;
+            transition: color 0.2s ease;
         }
         
         .password-toggle:hover {
@@ -97,11 +117,17 @@
         }
         
         .caps-warning {
-            background: #f5365c;
+            background: #ff3b30;
             color: #ffffff;
             padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .text-danger {
+            color: #ff3b30 !important;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -110,10 +136,10 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="col-lg-5 col-md-7">
-                <div class="card login-card border-0">
+                <div class="login-card">
                     <div class="login-header">
                         <h3>ระบบคำนวณต้นทุน SCMI</h3>
-                        <p class="text-white mb-0 mt-2">กรุณาลงชื่อเข้าสู่ระบบ</p>
+                        <p>กรุณาลงชื่อเข้าสู่ระบบ</p>
                     </div>
                     
                     <div class="login-body">
@@ -133,14 +159,14 @@
                             
                             <div class="row mb-3">
                                 <div class="col-8">
-                                    <span id="warning-msg" class="text-danger" style="visibility: hidden; font-size: 0.875rem;"></span>
+                                    <span id="warning-msg" class="text-danger" style="visibility: hidden;"></span>
                                 </div>
                                 <div class="col-4 text-end">
                                     <span class="caps-warning" id="cap-warning" style="visibility: hidden;">Caps Lock On</span>
                                 </div>
                             </div>
                             
-                            <div class="text-center">
+                            <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-login btn-lg w-100">
                                     <i class="fas fa-sign-in-alt me-2"></i>เข้าระบบ
                                 </button>

@@ -41,50 +41,88 @@
     <!-- Argon Dashboard CSS -->
     <link href="<?php echo asset_url('assets/templates/argon-dashboard/css/argon-dashboard.min.css')?>" rel="stylesheet" />
     
-    <!-- Custom CSS -->
+    <!-- Custom macOS CSS -->
     <link href="<?php echo asset_url('assets/css/argon-custom.css')?>" rel="stylesheet" />
     
     <style>
-        /* Top Menu Specific Styles */
-        .top-navbar {
-            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
-            box-shadow: 0 2px 12px 0 rgba(0,0,0,.16);
+        /* macOS-style Top Navbar - Darker Version */
+        .macos-navbar {
+            background: rgba(29, 29, 31, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            color: #ffffff !important;
+            font-size: 1.1rem;
         }
         
         .navbar-nav .nav-link {
-            color: rgba(255,255,255,0.8) !important;
+            color: rgba(255, 255, 255, 0.85) !important;
             font-weight: 500;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
         
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
             color: #ffffff !important;
-            background: rgba(255,255,255,0.1);
-            border-radius: 0.5rem;
+        }
+        
+        .navbar-nav .nav-link.active {
+            background-color: rgba(5, 51, 181, 0.3);
+            color: #ffffff !important;
         }
         
         .navbar-nav .dropdown-menu {
-            border: none;
-            box-shadow: 0 8px 26px -4px rgba(20,20,20,0.15);
-            border-radius: 0.5rem;
+            background: rgba(45, 45, 48, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 8px;
+            margin-top: 8px;
         }
         
         .navbar-nav .dropdown-item {
-            padding: 0.5rem 1.5rem;
-            transition: all 0.2s;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.15s ease;
+            color: rgba(255, 255, 255, 0.85);
         }
         
-        .navbar-nav .dropdown-item:hover,
+        .navbar-nav .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+        
         .navbar-nav .dropdown-item.active {
-            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
+            background-color: #0533b5;
             color: #ffffff;
         }
         
         .main-content-wrapper {
             min-height: calc(100vh - 80px);
-            padding-top: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
     </style>
 </head>
@@ -95,13 +133,13 @@
     $part_menu = strtolower(uri_string());
 ?>
 
-<!-- Top Navbar -->
-<nav class="navbar navbar-expand-lg top-navbar sticky-top">
-    <div class="container-fluid">
+<!-- macOS-style Top Navbar -->
+<nav class="navbar navbar-expand-lg macos-navbar sticky-top">
+    <div class="container-fluid px-4">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="<?php echo base_url('main')?>">
-            <img src="<?php echo base_url('/assets/images/logo-small.png')?>" height="40" alt="SCMI Logo" class="me-2">
-            <span class="text-white font-weight-bold">SCMI Costing</span>
+            <img src="<?php echo base_url('/assets/images/logo-small.png')?>" height="32" alt="SCMI Logo" class="me-2">
+            <span>SCMI Costing</span>
         </a>
         
         <!-- Mobile Toggle -->
@@ -111,23 +149,23 @@
         
         <!-- Menu Items -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto ms-4">
                 <?php echo $menu_item_html;?>
             </ul>
             
             <!-- Right Side Menu -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
-                        <i class="fa fa-user-circle me-1"></i>
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+                        <i class="fa fa-user-circle me-2" style="font-size: 1.2rem;"></i>
                         <span><?php echo $this->session->userdata('user_name'); ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="<?php echo base_url('user/editmyprofile')?>">
+                        <li><a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('user/editmyprofile')?>">
                             <i class="fa fa-user me-2"></i>แก้ไขข้อมูลผู้ใช้
                         </a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<?php echo base_url('login/out')?>">
+                        <li><hr class="dropdown-divider my-1"></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('login/out')?>">
                             <i class="fa fa-sign-out-alt me-2"></i>ออกจากระบบ
                         </a></li>
                     </ul>
@@ -136,11 +174,11 @@
         </div>
     </div>
 </nav>
-<!-- End Top Navbar -->
+<!-- End macOS Navbar -->
 
 <!-- Main Content Wrapper -->
 <div class="main-content-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
     
     <!-- Loading Overlay -->
     <div class="waitloader-overlay" style="display: none;">
