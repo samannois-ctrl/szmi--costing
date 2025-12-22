@@ -1,0 +1,35 @@
+# Vendor directories
+vendor/
+node_modules/
+
+# Cache and logs
+application/cache/*
+application/logs/*
+!application/cache/index.html
+!application/logs/index.html
+
+# Environment files
+.env
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads (ถ้าไม่ต้องการ push ไฟล์ที่ upload)
+uploads/*
+!uploads/.gitkeep
+
+# Database backups
+*.sql
+*.sql.gz
+
+# Temporary files
+*.tmp
+*.temp
+*~
