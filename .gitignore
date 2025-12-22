@@ -12,6 +12,9 @@ application/logs/*
 .env
 .env.*
 
+# Production config (sensitive data)
+application/config/production/
+
 # IDE files
 .vscode/
 .idea/
