@@ -64,8 +64,6 @@
 	table-layout: fixed;
 	border-collapse: collapse;
 	border-spacing: 0;
-
-
 }
 
 .tbl-pos-data td, .tbl-pos-data th{
@@ -78,7 +76,6 @@
 }
 
 .tbl-pos-data th{
-
 	text-align: center;
 }
 
@@ -86,9 +83,7 @@
 	table-layout: fixed;
 	border-collapse: collapse;
 	border-spacing: 0;
-	position: relative;;
-
-
+	position: relative;
 }
 
 #tbl-pos-main td, #tbl-pos-main th{
@@ -97,17 +92,13 @@
 	padding-right: 3px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	
 	border: 1px solid #cfcfcf;
 }
 
 #tbl-pos-main th{
-
 	position: sticky;
 	top:0;
-
 }
-
 
 .row-appform-used td{
 	background: #e2f9fb !important;
@@ -121,7 +112,60 @@
 	padding-top: 10px;
 }
 
+/* Sheet Tabs Styling */
+.sheet-tabs-wrapper {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
 
+.sheet-tabs-wrapper::-webkit-scrollbar {
+	height: 6px;
+}
+
+.sheet-tabs-wrapper::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.sheet-tabs-wrapper::-webkit-scrollbar-thumb {
+	background: rgba(255,255,255,0.3);
+	border-radius: 3px;
+}
+
+.sheet-tab-item {
+	flex-shrink: 0;
+}
+
+.sheet-tab-item .btn-sheet-link {
+	display: block;
+	padding: 0.5rem 1rem;
+	color: rgba(255,255,255,0.7);
+	background: transparent;
+	border: none;
+	border-radius: 6px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.sheet-tab-item .btn-sheet-link:hover {
+	background: rgba(255,255,255,0.1);
+	color: rgba(255,255,255,0.9);
+}
+
+.sheet-tab-item.active .btn-sheet-link {
+	background: var(--macos-white);
+	color: var(--macos-text);
+	box-shadow: var(--shadow-sm);
+}
+
+/* Calc Toolbar */
+.calc-toolbar .form-control:focus {
+	border-color: var(--scmi-blue);
+	box-shadow: 0 0 0 3px rgba(5, 51, 181, 0.1);
+}
 
 </style>
 
@@ -209,89 +253,60 @@
 		</div>
 	</div>
 
-		<!-- <input type="date" id="calc-date-input"  /> -->
-		<section class="content" style="padding:0;<?php if(!$is_calc_fc){ ?> display:none; <?php } ?>">
+	<!-- Sheet Tabs and Grid -->
+	<section class="content" style="padding:0;<?php if(!$is_calc_fc){ ?> display:none; <?php } ?>">
 
-			<!-- Sheet tab head start -->
-
-			<!-- Sheet tab head end -->
-
-
-			<div class="row div-sheet-head-wrapper"  style="background-color: #055CFFFF;">
-
-				<?php 
-				if(!empty($list_sheet)){
-					$active_sheet_name = $list_sheet[0]['real_sheet_name_on_excel'];
-				}else{
-					$active_sheet_name = '';
-				}
-				foreach ($list_sheet as $idx => $sheet) { 
-					
-						
-				?>
-					<div class="col-auto pr-3 row div-sheet-item div-sheet-<?php echo $sheet['sheet']?> <?php echo ($idx==0)?('active'):('');?>	" 
-					data-sheet="<?php echo $sheet['sheet']?>"
-					data-real_sheet_name_on_excel="<?php echo html_show($sheet['real_sheet_name_on_excel'])?>"
-					
-					>
-						<div class="col-auto">
-							<a class="btn-sheet-link" onclick="clickBtnSheet(this)" data-sheet="<?php echo $sheet['sheet']?>"> 
-								<?php echo html_show($sheet['real_sheet_name_on_excel']) ?> 
-							</a>
-						</div>
-						<!-- <div class="col-auto ">
-							<div class="sheet-spin czollapse loading-spinner mt-2 collapse"></div>
-							
-						</div>
-						<div class="col-auto ">
-							
-							<button class="sheet-btn-calc btn btn-sm btn-light collapse"><i class="bi bi-calculator-fill"></i></button>
-						</div>
-						
-						<span class="calc-btn-action">
-							
-						</span> -->
+		<div class="row">
+			<div class="col-12">
+				<div class="content-card" style="padding: 0; overflow: hidden;">
+					<!-- Sheet Tab Header -->
+					<div class="sheet-tabs-wrapper" style="background: linear-gradient(135deg, #1d1d1f 0%, #2d2d30 100%); padding: 0.75rem 1.5rem; display: flex; gap: 0.5rem; overflow-x: auto;">
+						<?php 
+						if(!empty($list_sheet)){
+							$active_sheet_name = $list_sheet[0]['real_sheet_name_on_excel'];
+						}else{
+							$active_sheet_name = '';
+						}
+						foreach ($list_sheet as $idx => $sheet) { 
+						?>
+							<div class="sheet-tab-item div-sheet-<?php echo $sheet['sheet']?> <?php echo ($idx==0)?('active'):('');?>" 
+							data-sheet="<?php echo $sheet['sheet']?>"
+							data-real_sheet_name_on_excel="<?php echo html_show($sheet['real_sheet_name_on_excel'])?>">
+								<a class="btn-sheet-link" onclick="clickBtnSheet(this)" data-sheet="<?php echo $sheet['sheet']?>">
+									<?php echo html_show($sheet['real_sheet_name_on_excel']) ?>
+								</a>
+							</div>
+						<?php } ?>
 					</div>
-				<?php } ?>
-
-			</div>
-			
-			<div class="sheet-active-header text-bold collapse" >
-				<?php echo $active_sheet_name ?>
-			</div>
-
-
-			<div class="row mt-2 mb-2">
-				<div class="col">
-					<button class="btn btn-sm btn-success btn-save-sheet" onclick="saveSheetRecalc()" title="บันทึก"><i class="bi bi-save"></i> บันทึกชีทนี้ </button>
-				</div>
-			
-				<div class="col text-right">
-					<div class="filter-header " style="width: 300px;display: inline-block;">
-						<span>ค้นหา:</span>
-						<input class="form-control form-control-sm" style="display: inline;width:auto;" type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
+					
+					<!-- Toolbar -->
+					<div class="calc-toolbar" style="background: var(--macos-gray-50); padding: 1rem 1.5rem; border-bottom: 1px solid var(--macos-gray-200);">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<button class="btn btn-success btn-sm" onclick="saveSheetRecalc()" title="บันทึก">
+									<i class="bi bi-save me-1"></i>บันทึกชีทนี้
+								</button>
+							</div>
+							
+							<div class="col-auto ms-auto">
+								<div class="d-flex align-items-center gap-2">
+									<label class="mb-0 text-muted" style="font-size: 0.9rem;">ค้นหา:</label>
+									<input class="form-control form-control-sm" style="width: 250px;" type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
+								</div>
+							</div>
+						</div>
 					</div>
+
+					<!-- Grid Content -->
+					<div id="sheet-calc-content" style="height: calc(100vh - 400px); background: var(--macos-white);"></div>
 				</div>
-
 			</div>
-			
-
-
-
-			<div id="sheet-calc-content" style="height: calc(100vh - 300px);">
-
-
-			</div>
-		
-		</section>
-
- 
-		<div class="compare-table">
-
-
 		</div>
+	
+	</section>
+
+	<div class="compare-table"></div>
 
 </section>
 
 </div>
- 
