@@ -43,79 +43,104 @@
     
     <!-- Custom CSS -->
     <link href="<?php echo asset_url('assets/css/argon-custom.css')?>" rel="stylesheet" />
+    
+    <style>
+        /* Top Menu Specific Styles */
+        .top-navbar {
+            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,.16);
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255,255,255,0.1);
+            border-radius: 0.5rem;
+        }
+        
+        .navbar-nav .dropdown-menu {
+            border: none;
+            box-shadow: 0 8px 26px -4px rgba(20,20,20,0.15);
+            border-radius: 0.5rem;
+        }
+        
+        .navbar-nav .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .navbar-nav .dropdown-item:hover,
+        .navbar-nav .dropdown-item.active {
+            background: linear-gradient(310deg, #0533b5 0%, #014cc1 100%);
+            color: #ffffff;
+        }
+        
+        .main-content-wrapper {
+            min-height: calc(100vh - 80px);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="bg-gray-100">
     
 <?php
     $part_menu = strtolower(uri_string());
 ?>
 
-<!-- Sidebar -->
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-primary" id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="<?php echo base_url('main')?>">
-            <img src="<?php echo base_url('/assets/images/logo-small.png')?>" class="navbar-brand-img h-100" alt="SCMI Logo">
-            <span class="ms-1 font-weight-bold text-white">SCMI Costing</span>
+<!-- Top Navbar -->
+<nav class="navbar navbar-expand-lg top-navbar sticky-top">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="<?php echo base_url('main')?>">
+            <img src="<?php echo base_url('/assets/images/logo-small.png')?>" height="40" alt="SCMI Logo" class="me-2">
+            <span class="text-white font-weight-bold">SCMI Costing</span>
         </a>
-    </div>
-    
-    <hr class="horizontal light mt-0 mb-2">
-    
-    <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            <?php echo $menu_item_html;?>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->
-
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-        <div class="container-fluid py-1 px-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">หน้าหลัก</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">ระบบคำนวณต้นทุน</h6>
-            </nav>
+        
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Menu Items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <?php echo $menu_item_html;?>
+            </ul>
             
-            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <!-- Search or other elements can go here -->
-                </div>
-                
-                <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="<?php echo base_url('user/editmyprofile')?>" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none"><?php echo $this->session->userdata('user_name'); ?></span>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="<?php echo base_url('login/out')?>" class="nav-link text-body p-0" title="ออกจากระบบ">
-                            <i class="fa fa-sign-out-alt cursor-pointer"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <!-- Right Side Menu -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+                        <i class="fa fa-user-circle me-1"></i>
+                        <span><?php echo $this->session->userdata('user_name'); ?></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="<?php echo base_url('user/editmyprofile')?>">
+                            <i class="fa fa-user me-2"></i>แก้ไขข้อมูลผู้ใช้
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="<?php echo base_url('login/out')?>">
+                            <i class="fa fa-sign-out-alt me-2"></i>ออกจากระบบ
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
-    <!-- End Navbar -->
+    </div>
+</nav>
+<!-- End Top Navbar -->
+
+<!-- Main Content Wrapper -->
+<div class="main-content-wrapper">
+    <div class="container-fluid">
     
     <!-- Loading Overlay -->
     <div class="waitloader-overlay" style="display: none;">
