@@ -1185,8 +1185,40 @@ public function saveCalcSheetRecalc()
 
 public function report(){
 	
+	// Load models
+	$this->load->model('Report_model');
+	$this->load->model('Cost_model');
+	$this->load->model('Calc_model');
+	
 	$data = [];
-		 
+	
+	// Get year/month from query params or use current date
+	$data['select_year'] = get_select_year_from_input();
+	$data['select_month'] = get_select_month_from_input();
+	
+	// Check if calculation exists for this month
+	$data['is_file_completed'] = $this->Cost_model->getIsFileUploadComplete($data['select_year'], $data['select_month']);
+	$is_calc_fc = $this->Calc_model->checkFilecategoryIsCalcCost($data['select_year'], $data['select_month'], 'datacost');
+	$data['is_calc_fc'] = $is_calc_fc;
+	
+	// Fetch report data only if calculation exists
+	if ($data['is_file_completed'] && $is_calc_fc) {
+		$data['kpis'] = $this->Report_model->getMarginKPIs($data['select_year'], $data['select_month']);
+		$data['distribution'] = $this->Report_model->getMarginDistribution($data['select_year'], $data['select_month']);
+		$data['trend'] = $this->Report_model->getMarginTrend($data['select_year'], $data['select_month']);
+		$data['top_products'] = $this->Report_model->getTopProfitProducts($data['select_year'], $data['select_month']);
+		$data['low_margin'] = $this->Report_model->getLowMarginProducts($data['select_year'], $data['select_month']);
+		$data['by_machine'] = $this->Report_model->getMarginByMachine($data['select_year'], $data['select_month']);
+	} else {
+		// Initialize empty data
+		$data['kpis'] = [];
+		$data['distribution'] = [];
+		$data['trend'] = [];
+		$data['top_products'] = [];
+		$data['low_margin'] = [];
+		$data['by_machine'] = [];
+	}
+	
 	$header_data['menu_item_html'] = $this->Menu_model->get_html_menu_header(strtolower(uri_string())); //part_menu = strtolower(uri_string())
 	
 	$this->load->view('_header', $header_data);
