@@ -1,0 +1,86 @@
+/* 
+ * Dashboard Glass UI Navbar Styles
+ * Glassmorphism effect for navigation bar
+ */
+
+/* Glass Navbar */
+.navbar.bg-web-main {
+    background: rgba(5, 51, 181, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(5, 51, 181, 0.2);
+}
+
+/* Navbar Links */
+.navbar.bg-web-main .nav-link {
+    color: rgba(255, 255, 255, 0.95) !important;
+    transition: all 0.2s ease;
+}
+
+.navbar.bg-web-main .nav-link:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* Dropdown Menu Glass Effect */
+.navbar .dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+}
+
+.navbar .dropdown-item {
+    transition: all 0.2s ease;
+}
+
+.navbar .dropdown-item:hover {
+    background: rgba(5, 51, 181, 0.1);
+    color: #0533b5;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    background: transparent !important;
+}
+
+/* Main Content Area */
+.content {
+    padding: 20px;
+}
+
+/* Glass Cards for Content */
+.content .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+}
+
+.content .card-header {
+    background: rgba(245, 247, 250, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Override AdminLTE default backgrounds */
+.wrapper {
+    background: transparent !important;
+}
+
+/* Ensure text is readable */
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    color: var(--macos-text);
+}

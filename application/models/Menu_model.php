@@ -82,8 +82,8 @@ class Menu_model extends CI_Model {
                 }
                
                 $html .= '<li class="nav-item dropdown">';
-                $html .= '<a class="nav-link dropdown-toggle '.$active_class.'" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
-                $html .= $menu['title'];
+            $html .= '<a class="nav-link dropdown-toggle '.$active_class.'" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+            $html .= $menu['title'];
                 $html .= '</a>';
                 $html .= '<ul class="dropdown-menu">';
                 

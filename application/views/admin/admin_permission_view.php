@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="<?php echo base_url('assets/css/cost-list-glass.css'); ?>">
 
 <div class="content-wrapper">
 

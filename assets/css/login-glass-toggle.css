@@ -1,0 +1,44 @@
+/* Toggle Password Button */
+.login-card .btn.toggle-password {
+    background: transparent;
+    border: none;
+    color: rgba(110, 110, 115, 0.8);
+    transition: all 0.2s ease;
+    padding: 0;
+    box-shadow: none !important;
+}
+
+.login-card .btn.toggle-password:hover {
+    color: #0533b5;
+    background: transparent;
+    border: none;
+}
+
+.login-card .btn.toggle-password:focus {
+    outline: none;
+    box-shadow: none !important;
+    border: none;
+}
+
+/* Override any button styles for the toggle icon */
+.login-card a.btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.login-card a.btn:hover {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.login-card a.btn:focus,
+.login-card a.btn:active {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}

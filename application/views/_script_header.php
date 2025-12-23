@@ -7,10 +7,9 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Argon Dashboard Core (Bootstrap 5) -->
-<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/popper.min.js')?>"></script>
-<script src="<?php echo asset_url('assets/templates/argon-dashboard/js/core/bootstrap.min.js')?>"></script>
-<!-- Note: Perfect Scrollbar removed to prevent errors with top menu layout -->
+<!-- Bootstrap 4 -->
+<!-- <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.min.js')?>"></script> -->
+<script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
 <!-- ChartJS -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/chart.js/Chart.min.js')?>"></script>
 <!-- Sparkline -->
@@ -30,7 +29,8 @@
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/summernote/summernote-bs4.min.js')?>"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
-<!-- Note: Argon Dashboard JS removed to prevent Perfect Scrollbar errors -->
+<!-- AdminLTE App -->
+<script src="<?php echo asset_url('assets/templates/AdminLTE-3.2.0/dist/js/adminlte.js')?>"></script>
 
 
 <!-- SweetAlert2 -->
